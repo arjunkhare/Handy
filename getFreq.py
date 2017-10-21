@@ -56,7 +56,7 @@ dominantOnly = False
 globalFingerFlexions = [0, 0.167, 0.333, 0.5, 0.667, 0.833, 1, 1, 1]
 #list to be used to get index to insert correct finger flexions
 fingers = ["i", "m", "r", "p", "t"]
-#global values for the tuples of angles to be used for the 'MajorLocation's
+#global values for the tuples of angles to be used for the MajorLocations   For 4th element of list (Body), consider increasing 1st element of tuple (surface)
 locationAnglesDom = [[180/4, -180/4], [180/4, 0], [-180/4, -180/4], [180/4, -180/2]]
 locationAnglesNonDom = [[180/4, 180/4], [180/4, 0], [-180/4, 180/4], [180/4, 180/2]]
 #list to be used to get index to get correct location
@@ -68,9 +68,13 @@ for index, row in movements.iterrows():
 	signType = row["SignType"]
 	if signType == "OneHanded":
 		dominantOnly = True
+	
+	# Fingers
 	selectedFingers = list(row["SelectedFingers"])
 	flexion = row["Flexion"]
 	for finger in selectedFingers:
+		if flexion == 'Crossed' or flexion == 'Stacked':     # set crossed or stacked as minimum closedness (0)
+			flexion = '0'
 		fingerFlexions[fingers.index(finger)] = flexion
 		if finger == "t":						#simple hack done to check if first letter is t (which represents thumb) and breaks because thumb is only 1 finger
 			break									#(it can be seen that the thumb is never flexed in combination with other fingers (which is weird?))
@@ -78,11 +82,14 @@ for index, row in movements.iterrows():
 	domHandFlexTime = 0.75						#default number of seconds for fingers to be flexed in (arbitrary and can be changed later)
 	nonDomHandFlexions = fingerFlexions
 	nonDomHandFlexTime = 0.75					#default number of seconds for fingers to be flexed in (arbitrary and can be changed later)
+	
+	# Elbow
 	majorLocation = row["MajorLocation"]
 	domLocAngle = locationAnglesDom[locs.index(majorLocation)]
 	domLocMoveTime = 1.0						#default number of seconds for dominant hand to move to 'MajorLocation' (arbitrary and can be changed later)
 	nonDomLocAngle = locationAnglesNonDom[locs.index(majorLocation)]
 	nonDomLocMoveTime = 1.0						#default number of seconds for nondominant hand to move to 'MajorLocation' (arbitrary and can be changed later)
+	
 	###TO DO: get the angles for how movements work i.e. back and forth, curved etc.###
 	biglist = domHandFlexions + [domHandFlexTime] \
 			+ nonDomHandFlexions + [nonDomHandFlexTime] \
