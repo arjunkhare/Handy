@@ -3,6 +3,9 @@ import csv
 import math
 import numpy
 import time
+import nltk
+import random
+from nltk.stem.wordnet import WordNetLemmatizer
 pi = math.pi
 
 
@@ -374,7 +377,29 @@ def getEncoding(smallerList):
 import serial
 ser = serial.Serial('/dev/tty.usbmodem1411', 9600)
 
+def reset():
+    print("resetting all configurations")
+    resetArr = [["<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                 "~"],
+                 ["<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                 "~"]]
+    for instrLine in resetArr:
+        for instr in instrLine:
+            ser.write(instr)
+            print(instr)
+        time.sleep(0.50)
+
+
 def handwave():
+    print("handwave hi there!")
     handArr = [["<0>", "<0>", "<0>", "<0>",
                 "<0>", "<0>", "<0>", "<0>",
                 "<0>", "<20>", "<1>", "<1>",
@@ -424,6 +449,7 @@ def handwave():
         time.sleep(0.5)
 
 def queenwave():
+    print("queen wave woooooo")
     qunray = [["<0>", "<0>", "<0>", "<0>",
                 "<0>", "<0>", "<0>", "<35>",
                 "<0>", "<0>", "<20>", "<20>",
@@ -472,6 +498,121 @@ def queenwave():
             print(instr)
         time.sleep(0.5)
 
+
+def countdown():
+    print("rock papers scissors countdown")
+    coArr = [["<0>", "<0>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<0>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<0>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"]
+            ]
+    for instrLine in coArr:
+        for instr in instrLine:
+            ser.write(instr)
+            print(instr)
+        time.sleep(0.50)
+
+def rock():
+    print("rock")
+    rockArr = [["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                 "~"],
+                 ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                 "~"]]
+    for instrLine in rockArr:
+        for instr in instrLine:
+            ser.write(instr)
+            print(instr)
+        time.sleep(0.50)
+
+def paper():
+    print("paper")
+    paperArr = [["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                 "~"],
+                 ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                "<1>", "<1>", "<1>", "<1>",
+                 "~"]]
+    for instrLine in paperArr:
+        for instr in instrLine:
+            ser.write(instr)
+            print(instr)
+        time.sleep(0.50)
+
+def scissors():
+    print("scissors")
+    scisArr = [["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<1>",
+                "<1>", "<99>", "<99>", "<99>",
+                "<1>", "<1>", "<99>", "<99>",
+                 "~"],
+                ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<1>",
+                "<1>", "<99>", "<99>", "<99>",
+                "<1>", "<1>", "<99>", "<99>",
+                 "~"]]
+    for instrLine in scisArr:
+        for instr in instrLine:
+            ser.write(instr)
+            print(instr)
+        time.sleep(0.50)
+
+def playRockPaperScissors():
+    print("playing rock paper scissors!!")
+    countdown()
+    a = random.uniform(0, 1)
+    if a <= 0.333:
+        rock()
+    elif a <= 0.667:
+        paper()
+    elif a <= 1.00:
+        scissors()
+    time.sleep(5)
+    reset()
+
+
+
 # print("airplace*****")
 # ExecuteWithHandy("yesterday")
 # time.sleep(2)
@@ -481,36 +622,13 @@ def queenwave():
 # print("wander*****")
 # ExecuteWithHandy("wander")
 
-# def resetHandy():
-#     resetArr = ["<0>", "<0>", "<0>", "<0>",
-#                 "<0>", "<0>", "<0>", "<0>",
-#                 "<0>", "<0>", "<1>", "<1>",
-#                 "<1>", "<1>", "<1>", "<1>",
-#                 "<1>", "<1>", "<1>", "<1>",
-#                  "~"]
-#     for instr in resetArr:
-#         ser.write(instr)
-# resetHandy()
-
-# def manual():
-#     manArr = ["<0>", "<0>", "<0>", "<0>",
-#                 "<0>", "<0>", "<0>", "<0>",
-#                 "<0>", "<0>", "<99>", "<99>",
-#                 "<99>", "<99>", "<99>", "<99>",
-#                 "<99>", "<99>", "<99>", "<99>", 
-#                 "~"]
-#     for instr in manArr:
-#         ser.write(instr)
-#         print(instr)
-# manual()
-
 def ExecuteWithHandy(instructionID):
     result = getEncoding(finalDict.get(instructionID))
     for instrLine in result:
         for instruction in instrLine:
             ser.write(instruction)
             print(instruction)
-        time.sleep(0.5)
+        time.sleep(0.25)
 
 def testBreak():
     with open('outputtext.txt', 'r') as myfile:
@@ -518,12 +636,16 @@ def testBreak():
         wordArr = data.split(" ")
         corrArr = []
         for word in wordArr:
+            # lmtzr = WordNetLemmatizer()
+            # print(lmtzr.lemmatize('word'))
             if word in finalDict:
                 corrArr += [word]
-        # print(corrArr)
         for finalW in corrArr:
             ExecuteWithHandy(finalW)
-            time.sleep(0.25)
+            time.sleep(0.10)
+        time.sleep(1.0)
+        reset()
+        print(corrArr)
 
 
 
