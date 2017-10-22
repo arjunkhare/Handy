@@ -1,0 +1,97 @@
+//this code is a calibration device for the hands
+//it allows the user to adjust all of the parameters without having to recompile constantly
+//used to find absolute values for all the parameters
+//
+
+
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+Adafruit_PWMServoDriver rightHand = Adafruit_PWMServoDriver();
+Adafruit_PWMServoDriver leftHand = Adafruit_PWMServoDriver(0x41);
+
+int servoNum;
+int servoHand;
+int servoPulse;
+int data = 0;
+int avrg = 307;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+Serial.println("get ready for this jelly");
+
+rightHand.begin();
+leftHand.begin();
+
+rightHand.setPWMFreq(50); //makes servo happy
+leftHand.setPWMFreq(50); //makes servo happy
+
+
+for (int i = 0; i<15; i++){
+  rightHand.setPWM(i,0, avrg);
+  leftHand.setPWM(i,0, avrg);
+}
+yield();
+}
+
+void loop() {
+//  Serial.println("wtf");
+  
+  // put your main code here, to run repeatedly:
+if (Serial.available()>0) {
+    data = Serial.parseInt();
+  if (data == 1) { 
+    servoHand = 0;
+    Serial.println("you selected the right hand");
+  }
+  if (data == 2) {
+    servoHand = 1;
+    Serial.println("you selected the left hand");
+  }
+  if (data == 0) {
+    for (int i = 0; i<15; i++){
+      rightHand.setPWM(i,0, avrg);
+      leftHand.setPWM(i,0, avrg);
+      servoPulse = avrg;
+    }
+    Serial.println("cancelled");
+  }
+  if (data > 5 and data <250){
+    servoNum = (data / 10)-1;
+     Serial.print("you selected the servo numbered ");
+      Serial.println(servoNum);    
+  }
+  if (data > 900) {
+    servoPulse = data / 10;
+     Serial.print("you set the pulse of the ");
+      Serial.print(servoNum);
+       Serial.print(" servo of the ");
+        Serial.print(servoHand);
+         Serial.print(" (0 for rigth 1 for left) hand to ");
+          Serial.println(servoPulse);
+  }
+  if (servoHand == 0) {
+    rightHand.setPWM(servoNum, 0, servoPulse);
+  }
+  if (servoHand == 1) {
+    leftHand.setPWM(servoNum, 0, servoPulse);
+  }
+}
+
+//for (int yourmom = 5; yourmom <9; yourmom ++){
+//  leftHand.setPWM(yourmom,0,100);
+//}
+//
+//for (int pls = 175;pls<350;pls++){
+//  
+//leftHand.setPWM(4,0,pls);
+//delay(2);
+//}
+//
+//for (int pls = 350;pls>175;pls--){
+//leftHand.setPWM(4,0,pls);
+//delay(2);
+//}
+
+}
