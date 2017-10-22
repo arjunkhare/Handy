@@ -24,6 +24,8 @@ pi = math.pi
 # 	if(row["SignType"] == "AsymmetricalDifferentHandshape" or row["SignType"] == "Other"
 # 	   or row["MajorLocation"] == "Arm" or row["MajorLocation"] == "Other"):
 # 	    indices += [index]
+# 	if(row["EntryID"].find("_") != -1):
+# 		indices += [index]
 # print(movements.shape)
 # movements.drop(movements.index[indices], inplace = True)
 # print(movements.shape)
@@ -96,8 +98,6 @@ for index, row in movements.iterrows():
 			+ domLocAngle + [domLocMoveTime] \
 			+ nonDomLocAngle + [nonDomLocMoveTime]
 	print(row["EntryID"], biglist)
-
-
 
 
 

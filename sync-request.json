@@ -1,0 +1,11 @@
+{
+  "config": {
+      "encoding":"MP3",
+      "sampleRateHertz": 16000,
+      "languageCode": "en-US",
+      "enableWordTimeOffsets": false
+  },
+  "audio": {
+      "uri":"trimaud.mp3"
+  }
+}
