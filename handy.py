@@ -395,7 +395,7 @@ def reset():
         for instr in instrLine:
             ser.write(instr)
             print(instr)
-        time.sleep(0.50)
+        time.sleep(1.00)
 
 
 def handwave():
@@ -530,13 +530,25 @@ def countdown():
                 "<0>", "<0>", "<99>", "<99>",
                 "<99>", "<99>", "<99>", "<99>",
                 "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<-120>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
+                "~"],
+                ["<0>", "<0>", "<110>", "<0>",
+                "<0>", "<0>", "<0>", "<0>",
+                "<0>", "<0>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>",
+                "<99>", "<99>", "<99>", "<99>", 
                 "~"]
             ]
     for instrLine in coArr:
         for instr in instrLine:
             ser.write(instr)
             print(instr)
-        time.sleep(0.50)
+        time.sleep(0.75)
 
 def rock():
     print("rock")
@@ -556,7 +568,7 @@ def rock():
         for instr in instrLine:
             ser.write(instr)
             print(instr)
-        time.sleep(0.50)
+        time.sleep(1.0)
 
 def paper():
     print("paper")
@@ -576,7 +588,7 @@ def paper():
         for instr in instrLine:
             ser.write(instr)
             print(instr)
-        time.sleep(0.50)
+        time.sleep(1.0)
 
 def scissors():
     print("scissors")
@@ -596,12 +608,13 @@ def scissors():
         for instr in instrLine:
             ser.write(instr)
             print(instr)
-        time.sleep(0.50)
+        time.sleep(1.0)
 
 def playRockPaperScissors():
     print("playing rock paper scissors!!")
     countdown()
     a = random.uniform(0, 1)
+    time.sleep(0.75)
     if a <= 0.333:
         rock()
     elif a <= 0.667:
@@ -610,8 +623,6 @@ def playRockPaperScissors():
         scissors()
     time.sleep(5)
     reset()
-
-
 
 # print("airplace*****")
 # ExecuteWithHandy("yesterday")
